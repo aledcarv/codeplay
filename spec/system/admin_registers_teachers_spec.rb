@@ -40,7 +40,7 @@ describe 'admin register teacher' do
         expect(page).to have_content('Cadastre todas as informações', count: 2)
     end
 
-    it 'and code must be uniq' do
+    it 'and email must be uniq' do
         teacher1 = Teacher.create!(name: 'Gonzaga',
                                    email: 'gonzaga.profteste@code.com',
                                    bio: 'Professor de geografia')
