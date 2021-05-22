@@ -20,7 +20,7 @@ describe 'admin edits teacher' do
         attach_file 'Foto', Rails.root.join('spec/fixtures/teacher-one.jpg')
         click_on 'Editar professor'
 
-        expect(current_path).to eq(teacher_path(Teacher.last))
+        expect(current_path).to eq(teacher_path(teacher1))
         expect(page).to have_content('Cartola')
         expect(page).to have_content('cartola.profteste@code.com')
         expect(page).to have_content('Professor de história')
