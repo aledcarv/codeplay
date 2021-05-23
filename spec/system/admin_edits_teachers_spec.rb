@@ -17,7 +17,7 @@ describe 'admin edits teacher' do
         fill_in 'Nome', with: 'Cartola'
         fill_in 'Email', with: 'cartola.profteste@code.com'
         fill_in 'Bio', with: 'Professor de história'
-        attach_file 'Foto', Rails.root.join('spec/fixtures/teacher-one.jpg')
+        attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/teacher-one.jpg')
         click_on 'Editar professor'
 
         expect(current_path).to eq(teacher_path(teacher1))
@@ -45,7 +45,7 @@ describe 'admin edits teacher' do
         fill_in 'Bio', with: ''
         click_on 'Editar professor'
 
-        expect(page).to have_content('Cadastre todas as informações', count: 2)
+        expect(page).to have_content('não pode ficar em branco', count: 2)
     end
 
     it 'and email must be uniq' do
@@ -71,6 +71,6 @@ describe 'admin edits teacher' do
         fill_in 'Email', with: 'cartola.profteste@code.com'
         click_on 'Editar professor'
         
-        expect(page).to have_content('O email já está em uso')
+        expect(page).to have_content('já está em uso')
     end
 end

@@ -1,5 +1,5 @@
 <% if @teachers.empty? %>
-    <p>Nenhum professor disponível</p>
+    <p><%= t('.no_teacher') %></p>
 <% end %>
 
 <% @teachers.each do |teacher| %>
@@ -9,5 +9,5 @@
     <%= image_tag teacher.profile_picture %>
 <% end %>
 
-<%= link_to 'Registrar um professor', new_teacher_path %>
-<%= link_to 'Voltar', root_path %>
+<%= link_to t('.register_teacher'), new_teacher_path %>
+<%= link_to t('.button_back'), root_path %>

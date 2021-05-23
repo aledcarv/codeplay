@@ -7,8 +7,8 @@ describe Course do
 
       teacher.valid?
 
-      expect(teacher.errors[:name]).to include('Cadastre todas as informações')
-      expect(teacher.errors[:email]).to include('Cadastre todas as informações')
+      expect(teacher.errors[:name]).to include('não pode ficar em branco')
+      expect(teacher.errors[:email]).to include('não pode ficar em branco')
     end
 
     it 'code must be uniq' do
@@ -20,7 +20,7 @@ describe Course do
 
       teacher.valid?
 
-      expect(teacher.errors[:email]).to include('O email já está em uso')
+      expect(teacher.errors[:email]).to include('já está em uso')
     end
   end
 end

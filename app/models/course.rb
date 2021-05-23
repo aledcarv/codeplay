@@ -1,5 +1,4 @@
 class Course < ApplicationRecord
-    validates :name, :code, :price, 
-        presence: {message: 'não pode ficar em branco'}, 
-        uniqueness: {scope: :code, message: 'já está em uso'}
+    validates :name, :code, :price, presence: true
+    validates :code, uniqueness: true
 end

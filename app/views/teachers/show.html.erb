@@ -1,14 +1,14 @@
 <h1><%= @teacher.name %></h1>
 
-<h2>Email</h2>
+<h2><%= Teacher.human_attribute_name(:email) %></h2>
 <p><%= @teacher.email %></p>
 
-<h2>Bio</h2>
+<h2><%= Teacher.human_attribute_name(:bio) %></h2>
 <p><%= @teacher.bio %></p>
 
-<h2>Foto de perfil</h2>
+<h2><%= Teacher.human_attribute_name(:profile_picture) %></h2>
 <p><%= image_tag @teacher.profile_picture %></p>
 
-<%= link_to 'Editar', edit_teacher_path(@teacher) %>
-<%= link_to 'Apagar',  @teacher, method: :delete %>
-<%= link_to 'Voltar', teachers_path %>
+<%= link_to t('.button_edit'), edit_teacher_path(@teacher) %>
+<%= link_to t('.button_delete'),  @teacher, method: :delete %>
+<%= link_to t('.button_back'), teachers_path %>

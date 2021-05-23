@@ -17,8 +17,8 @@ describe 'admin register teacher' do
         fill_in 'Nome', with: 'Gonzaga'
         fill_in 'Email', with: 'gonzaga.profteste@code.com'
         fill_in 'Bio', with: 'Professor de geografia'
-        attach_file 'Foto', Rails.root.join('spec/fixtures/teacher-two.jpg')
-        click_on 'Registrar'
+        attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/teacher-two.jpg')
+        click_on 'Criar professor'
 
         expect(current_path).to eq(teacher_path(Teacher.last))
         expect(page).to have_content('Gonzaga')
@@ -35,9 +35,9 @@ describe 'admin register teacher' do
         fill_in 'Nome', with: ''
         fill_in 'Email', with: ''
         fill_in 'Bio', with: ''
-        click_on 'Registrar'
+        click_on 'Criar professor'
 
-        expect(page).to have_content('Cadastre todas as informações', count: 2)
+        expect(page).to have_content('não pode ficar em branco', count: 2)
     end
 
     it 'and email must be uniq' do
@@ -53,8 +53,8 @@ describe 'admin register teacher' do
         click_on 'Registrar um professor'
 
         fill_in 'Email', with: 'gonzaga.profteste@code.com'
-        click_on 'Registrar'
+        click_on 'Criar professor'
         
-        expect(page).to have_content('O email já está em uso')
+        expect(page).to have_content('já está em uso')
     end
 end

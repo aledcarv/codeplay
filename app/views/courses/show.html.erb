@@ -1,18 +1,18 @@
 <h1><%= @course.name %></h1>
 <dl>
-    <dt>Descrição</dt>
+    <dt><%= Course.human_attribute_name(:description) %></dt>
     <dd><%= @course.description %></dd>
 
-    <dt>Código</dt>
+    <dt><%= Course.human_attribute_name(:code) %></dt>
     <dd><%= @course.code %></dd>
 
-    <dt>Preço</dt>
-    <dd><%= number_to_currency @course.price, unit: "R$", separator: ",", delimiter: ".", format: "%u %n" %></dd>
+    <dt><%= Course.human_attribute_name(:price) %>%%></dt>
+    <dd><%= number_to_currency @course.price %></dd>
 
-    <dt>Data limite de matrícula</dt>
-    <dd><%= @course.enrollment_deadline.strftime("%d/%m/%Y") %></dd>
+    <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
+    <dd><%= l @course.enrollment_deadline %></dd>
 </dl>
 
-<%= link_to 'Editar', edit_course_path(@course) %>
-<%= link_to 'Apagar', @course, method: :delete %>
-<%= link_to 'Voltar', courses_path %>
+<%= link_to t('.button_edit'), edit_course_path(@course) %>
+<%= link_to t('.button_apagar'), @course, method: :delete %>
+<%= link_to t('.button_back'), courses_path %>

@@ -1,0 +1,24 @@
+---
+pt-BR:
+  teachers:
+    index:
+      no_teacher: 'Nenhum professor disponível'
+      register_teacher: 'Registrar um professor'
+      button_back: 'Voltar'
+    show:
+      button_edit: 'Editar'
+      button_delete: 'Apagar'
+      button_back: 'Voltar'
+    new:
+      title: 'Registrar um professor'
+    edit:
+      title: 'Editar um professor'
+  activerecord:
+    models:
+      teacher: 'professor'
+    attributes:
+        teacher:
+          name: 'Nome'
+          email: 'Email'
+          bio: 'Bio'
+          profile_picture: 'Foto de perfil'

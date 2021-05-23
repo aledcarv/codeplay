@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
-    validates :name, :email, presence: { message: 'Cadastre todas as informações' }
-    validates :email, uniqueness: { message: 'O email já está em uso' }
+    validates :name, :email, presence: true
+    validates :email, uniqueness: true
 
     has_one_attached :profile_picture
 
