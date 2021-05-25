@@ -2,13 +2,17 @@ require 'rails_helper'
 
 describe 'Admin view courses' do
   it 'successfully' do
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
+
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033',
+                   teacher: teacher)
     Course.create!(name: 'Ruby on Rails',
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
-                   enrollment_deadline: '20/12/2033')
+                   enrollment_deadline: '20/12/2033', teacher: teacher)
 
     visit root_path
     click_on 'Cursos'
@@ -22,13 +26,16 @@ describe 'Admin view courses' do
   end
 
   it 'and view details' do
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
+
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', teacher: teacher)
     Course.create!(name: 'Ruby on Rails',
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
-                   enrollment_deadline: '20/12/2033')
+                   enrollment_deadline: '20/12/2033', teacher: teacher)
 
     visit root_path
     click_on 'Cursos'
@@ -39,6 +46,7 @@ describe 'Admin view courses' do
     expect(page).to have_content('RUBYONRAILS')
     expect(page).to have_content('R$ 20,00')
     expect(page).to have_content('20/12/2033')
+    expect(page).to have_link(teacher.name, href: teacher_path(teacher))
   end
 
   it 'and no course is available' do
@@ -49,9 +57,12 @@ describe 'Admin view courses' do
   end
 
   it 'and return to home page' do
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
+
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', teacher: teacher)
 
     visit root_path
     click_on 'Cursos'
@@ -61,9 +72,12 @@ describe 'Admin view courses' do
   end
 
   it 'and return to promotions page' do
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
+
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', teacher: teacher)
 
     visit root_path
     click_on 'Cursos'

@@ -1,4 +1,6 @@
 class Teacher < ApplicationRecord
+    has_many :courses
+
     validates :name, :email, presence: true
     validates :email, uniqueness: true
 
@@ -10,5 +12,9 @@ class Teacher < ApplicationRecord
         return if profile_picture.attached?
             profile_picture.attach(io: File.open('spec/fixtures/default.png'),
                                    filename: 'default.png')
+    end
+
+    def display_name
+        "#{name} - #{email}"
     end
 end

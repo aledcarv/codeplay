@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
     end
 
     def new
+        @teachers = Teacher.all
         @course = Course.new
     end
 
@@ -18,17 +19,20 @@ class CoursesController < ApplicationController
         if @course.save
             redirect_to @course
         else
+            @teachers = Teacher.all
             render :new
         end
     end
 
     def edit
+        @teachers = Teacher.all
     end
 
     def update
         if @course.update(course_params)
             redirect_to @course
         else
+            @teachers = Teacher.all
             render :edit
         end
     end
@@ -44,6 +48,6 @@ class CoursesController < ApplicationController
         end
 
         def course_params
-            params.require(:course).permit(:name, :description, :code, :price, :enrollment_deadline)
+            params.require(:course).permit(:name, :description, :code, :price, :teacher_id, :enrollment_deadline)
         end
 end

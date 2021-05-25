@@ -10,6 +10,9 @@ describe 'Admin registers courses' do
     end
   
     it 'successfully' do
+      teacher = Teacher.create!(name: 'Gonzaga',
+                                email: 'gonzaga.profteste@code.com')
+
       visit root_path
       click_on 'Cursos'
       click_on 'Registrar um Curso'
@@ -19,6 +22,7 @@ describe 'Admin registers courses' do
       fill_in 'Código', with: 'RUBYONRAILS'
       fill_in 'Preço', with: '30'
       fill_in 'Data limite de matrícula', with: '22/12/2033'
+      select "#{teacher.name} - #{teacher.email}", from: 'Professor'
       click_on 'Criar curso'
   
       expect(current_path).to eq(course_path(Course.last))
@@ -31,9 +35,12 @@ describe 'Admin registers courses' do
     end
 
     it 'and attributes cannot be blank' do
+      teacher = Teacher.create!(name: 'Gonzaga',
+                                email: 'gonzaga.profteste@code.com')
+
       Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                      code: 'RUBYBASIC', price: 10,
-                     enrollment_deadline: '22/12/2033')
+                     enrollment_deadline: '22/12/2033', teacher: teacher)
   
       visit root_path
       click_on 'Cursos'
@@ -49,9 +56,12 @@ describe 'Admin registers courses' do
     end
   
     it 'and code must be unique' do
+      teacher = Teacher.create!(name: 'Gonzaga',
+                                email: 'gonzaga.profteste@code.com')
+
       Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                      code: 'RUBYBASIC', price: 10,
-                     enrollment_deadline: '22/12/2033')
+                     enrollment_deadline: '22/12/2033', teacher: teacher)
   
       visit root_path
       click_on 'Cursos'

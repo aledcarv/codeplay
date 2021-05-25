@@ -2,11 +2,15 @@ require 'rails_helper'
 
 describe 'admin edits courses' do
     it 'succesfully' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com')
+
         course = Course.create!(name: 'Ruby',
                        description: 'Um curso de Ruby',
                        code: 'RUBYBASIC',
                        price: '10',
-                       enrollment_deadline: '22/12/2033')
+                       enrollment_deadline: '22/12/2033',
+                       teacher: teacher)
         
         visit root_path
         click_on 'Cursos'
@@ -18,6 +22,7 @@ describe 'admin edits courses' do
         fill_in 'Código', with: 'RUBYONRAILS'
         fill_in 'Preço', with: '30'
         fill_in 'Data limite de matrícula', with: '24/10/2034'
+        select "#{teacher.name} - #{teacher.email}", from: 'Professor'
         click_on 'Editar curso'
 
         expect(page).to have_content('Ruby on Rails')
@@ -28,11 +33,15 @@ describe 'admin edits courses' do
     end
 
     it 'and attribute can not be blank' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com')
+
         course = Course.create!(name: 'Ruby',
                                 description: 'Um curso de Ruby',
                                 code: 'RUBYBASIC',
                                 price: '10',
-                                enrollment_deadline: '22/12/2033')
+                                enrollment_deadline: '22/12/2033',
+                                teacher: teacher)
 
         visit root_path
         click_on 'Cursos'
@@ -50,17 +59,22 @@ describe 'admin edits courses' do
     end
 
     it 'and attribute must be unique' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com')
+
         course = Course.create!(name: 'Ruby',
                               description: 'Um curso de Ruby',
                               code: 'RUBYBASIC',
                               price: '10',
-                              enrollment_deadline: '22/12/2033')
+                              enrollment_deadline: '22/12/2033',
+                              teacher: teacher)
 
         another_course = Course.create!(name: 'Ruby on Rails',
                                         description: 'Um curso de Ruby on Rails',
                                         code: 'RUBYONRAILS',
                                         price: '30',
-                                        enrollment_deadline: '24/10/2034')
+                                        enrollment_deadline: '24/10/2034',
+                                        teacher: teacher)
 
         visit root_path
         click_on 'Cursos'

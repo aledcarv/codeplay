@@ -11,6 +11,9 @@
 
     <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
     <dd><%= l @course.enrollment_deadline %></dd>
+
+    <dt><%= Course.human_attribute_name(:teacher) %></dt>
+    <dd><%= link_to @course.teacher.name, teacher_path(@course.teacher) %></dd>
 </dl>
 
 <%= link_to t('.button_edit'), edit_course_path(@course) %>
