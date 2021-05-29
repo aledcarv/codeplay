@@ -10,5 +10,5 @@
 <p><%= image_tag @teacher.profile_picture %></p>
 
 <%= link_to t('.button_edit'), edit_teacher_path(@teacher) %>
-<%= link_to t('.button_delete'),  @teacher, method: :delete %>
+<%= link_to t('.button_delete'), @teacher, method: :delete %>
 <%= link_to t('.button_back'), teachers_path %>

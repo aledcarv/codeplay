@@ -1,0 +1,10 @@
+---
+pt-BR:
+  lessons:
+    activerecord:
+      models:
+        lesson: 'lesson'
+      attributes:
+        lesson:
+          name: 'Nome'
+          content: 'Conteúdo'
