@@ -1,10 +1,19 @@
 ---
 pt-BR:
   lessons:
-    activerecord:
-      models:
-        lesson: 'lesson'
-      attributes:
-        lesson:
-          name: 'Nome'
-          content: 'Conteúdo'
+    edit:
+      title: 'Editar uma aula'
+    new:
+      title: 'Nova aula'
+    show:
+      button_edit: 'Editar aula'
+      button_delete: 'Apagar'
+      button_back: 'Voltar'
+  activerecord:
+    models:
+      lesson: 'aula'
+    attributes:
+      lesson:
+        name: 'Nome'
+        content: 'Conteúdo'
+        course_id: 'curso'

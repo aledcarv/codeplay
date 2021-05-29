@@ -1,6 +1,6 @@
 <h1><%= @lesson.name %></h1>
 <p><%= @lesson.content %></p>
 
-<%= link_to 'Editar aula', edit_course_lesson_path(@lesson) %>
-<%= link_to 'Apagar', course_lesson_path(@course, @lesson), method: :delete %>
-<%= link_to 'Voltar', course_path(@course) %>
+<%= link_to t('.button_edit'), edit_course_lesson_path(@lesson) %>
+<%= link_to t('.button_delete'), course_lesson_path(@course, @lesson), method: :delete %>
+<%= link_to t('.button_back'), course_path(@course) %>

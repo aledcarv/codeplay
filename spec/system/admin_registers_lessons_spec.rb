@@ -14,6 +14,8 @@ describe 'admin registers lessons' do
         click_on course.name
         click_on 'Registrar uma aula'
 
+        expect(page).to have_text('Nova aula')
+
         fill_in 'Nome', with: 'Efeito estufa'
         fill_in 'Conteúdo', with: 'Aula sobre efeito estufa'
         click_on 'Registrar aula'

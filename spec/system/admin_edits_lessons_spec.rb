@@ -19,6 +19,8 @@ describe 'admin edits lesson' do
         click_on lesson.name
         click_on 'Editar aula'
 
+        expect(page).to have_text('Editar uma aula')
+        
         fill_in 'Nome', with: 'Urbanização'
         fill_in 'Conteúdo', with: 'Aula de urbanização'
         click_on 'Editar'

@@ -1,7 +1,7 @@
 <%= form_with model: [course, lesson] do |form| %>
-    <%= form.label :name, 'Nome' %>
+    <%= form.label :name %>
     <%= form.text_field :name %>
-    <%= form.label :content, 'Conteúdo' %>
+    <%= form.label :content %>
     <%= form.text_area :content %>
     <%= form.submit submit_text %>
 <% end %>
