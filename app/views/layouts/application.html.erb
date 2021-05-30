@@ -11,6 +11,21 @@
   </head>
 
   <body>
+    <nav>
+      <% if user_signed_in? %>
+        <%= current_user.email %>
+        <%= link_to 'Sair', '#' %>
+      <% else %>
+        <%= link_to 'Registrar-me', new_user_registration_path %>
+      <% end %>
+    </nav>
+
+    <% if notice %>
+      <div>
+        <%= notice %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
