@@ -12,5 +12,21 @@ pt-BR:
   devise:
     registrations:
       new:
-        registrar: Registrar
+        title: Registrar
         submit: Criar conta
+    sessions:
+      new:
+        title: Fazer login
+        submit: Entrar
+    shared:
+      links:
+        login: Entrar
+        signup: Cadastrar
+        forgot_password: Esqueceu sua senha?
+    passwords:
+      new:
+        title: Esqueceu sua senha?
+        submit: Enviar instruções para mudar a senha
+      edit:
+        submit: Mudar minha senha
+        mudar_senha: Mudar senha

@@ -7,7 +7,7 @@ describe 'admin registers lessons' do
 
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                 code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+                                enrollment_deadline: 2.years.from_now, teacher: teacher)
 
         visit root_path
         click_on 'Cursos'
@@ -30,7 +30,7 @@ describe 'admin registers lessons' do
 
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                 code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+                                enrollment_deadline: 2.years.from_now, teacher: teacher)
 
         visit root_path
         click_on 'Cursos'

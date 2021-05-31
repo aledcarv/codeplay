@@ -18,6 +18,12 @@
 
 <%= link_to 'Registrar uma aula', new_course_lesson_path(@course) %>
 
+<% if user_signed_in? %>
+    <%= link_to 'Comprar', enroll_course_path, method: :post %>
+<% else %>
+    <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
+<% end %>
+
 <% if @course.lessons.any? %>
     <% @course.lessons.each do |lesson|%>
         <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
