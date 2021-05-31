@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
     end
 
     def enroll
-        Enrollment.create!(user: current_user, course: @course)
+        current_user.enrollments.create!(course: @course, price: @course.price)
         redirect_to my_enroll_courses_path, notice: 'Curso comprado com sucesso'
     end
 
