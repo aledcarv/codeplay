@@ -32,10 +32,14 @@
 
 <% if @course.lessons.any? %>
     <% @course.lessons.each do |lesson|%>
-        <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
+        <% if current_user && current_user.courses.include?(@course) %>
+            <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
+        <% else %>
+            <%= lesson.name %>
+        <% end %>
     <% end %>
 <% else %>
-    <p><%= 'Nenhuma aula disponível' %></p>
+    <p><%= t('.no_available_lesson') %></p>
 <% end %>
 
 <%= link_to t('.button_edit'), edit_course_path(@course) %>

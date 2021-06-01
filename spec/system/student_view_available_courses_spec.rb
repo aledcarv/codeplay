@@ -109,8 +109,4 @@ describe 'student view available courses' do
         expect(page).to_not have_link('Comprar')
         expect(page).to have_link('Efeito estufa')
     end
-
-    xit 'without enrollment can not view lesson link' do
-        
-    end
 end

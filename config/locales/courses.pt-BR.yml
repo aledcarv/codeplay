@@ -10,7 +10,7 @@ pt-BR:
       buy: 'Comprar'
       enrollment_over: 'O prazo de matrícula desse curso encerrou'
       login_message_html: "Faça %{login_href} para comprar este curso"
-      no_availible_lesson: 'Nenhuma aula disponível'
+      no_available_lesson: 'Nenhuma aula disponível'
       button_edit: 'Editar'
       button_delete: 'Apagar'
       button_back: 'Voltar'
