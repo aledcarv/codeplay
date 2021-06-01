@@ -6,7 +6,7 @@
     <dt><%= Course.human_attribute_name(:code) %></dt>
     <dd><%= @course.code %></dd>
 
-    <dt><%= Course.human_attribute_name(:price) %>%%></dt>
+    <dt><%= Course.human_attribute_name(:price) %></dt>
     <dd><%= number_to_currency @course.price %></dd>
 
     <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
@@ -16,14 +16,18 @@
     <dd><%= link_to @course.teacher.name, teacher_path(@course.teacher) %></dd>
 </dl>
 
-<%= link_to 'Registrar uma aula', new_course_lesson_path(@course) %>
+<%= link_to t('.register_lesson'), new_course_lesson_path(@course) %>
 
 <% if user_signed_in? %>
     <% if current_user.courses.exclude?(@course) %>
-        <%= link_to 'Comprar', enroll_course_path, method: :post %>
+        <% if @course.enrollment_deadline >= Date.current %>
+            <%= link_to t('.buy'), enroll_course_path, method: :post %>
+        <% else %>
+            <p><%= t('.enrollment_over') %></p>
+        <% end %>
     <% end %>
 <% else %>
-    <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
+    <p><%= t('.login_message_html', login_href: (link_to 'login', new_user_session_path)) %></p>
 <% end %>
 
 <% if @course.lessons.any? %>

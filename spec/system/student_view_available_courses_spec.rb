@@ -36,8 +36,21 @@ describe 'student view available courses' do
         expect(page).to have_link('Comprar')
     end
 
-    xit 'and does not view enrollment if deadline is over' do
-        
+    it 'and does not view enrollment if deadline is over' do
+        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.prof@code.com')
+        unavailable_course = Course.create!(name: 'Matemática', description: 'Curso de matemática',
+                                          code: 'MATCURSO', price: 30,
+                                          enrollment_deadline: 1.day.ago, teacher: teacher)
+
+        login_as user, scope: :user
+        visit root_path
+        click_on 'Cursos'
+        click_on 'Matemática'
+
+        expect(page).to_not have_link('Comprar')
+        expect(page).to have_content('O prazo de matrícula desse curso encerrou')
     end
 
     it 'must be signed in to enroll' do
