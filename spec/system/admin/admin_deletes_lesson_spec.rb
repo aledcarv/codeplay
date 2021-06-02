@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'admin deletes lesson' do
     it 'delete' do
+        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.profteste@code.com')
 
@@ -13,13 +14,12 @@ describe 'admin deletes lesson' do
                                 content: 'Aula sobre efeito estufa',
                                 course: course)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
-        click_on lesson.name
+        login_as user, scope: :user
+
+        visit admin_course_lesson_path(course, lesson)
 
         expect { click_on 'Apagar' }.to change { Lesson.count }.by(-1)
 
-        expect(current_path).to eq(course_path(course))
+        expect(current_path).to eq(admin_course_path(course))
     end
 end

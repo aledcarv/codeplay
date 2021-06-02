@@ -1,5 +1,22 @@
 ---
 pt-BR:
+  admin:
+    courses:
+      index:
+        register_course: 'Registrar um Curso'
+      show:
+        register_lesson: 'Registrar uma aula'
+        buy: 'Comprar'
+        enrollment_over: 'O prazo de matrícula desse curso encerrou'
+        login_message_html: "Faça %{login_href} para comprar este curso"
+        no_available_lesson: 'Nenhuma aula disponível'
+        button_edit: 'Editar'
+        button_delete: 'Apagar'
+        button_back: 'Voltar'
+      new:
+        title: 'Registrar um curso'
+      edit:
+        title: 'Editar um curso'
   courses:
     index:
       no_course: 'Nenhum curso disponível'
@@ -18,6 +35,8 @@ pt-BR:
       title: 'Registrar um curso'
     edit:
       title: 'Editar um curso'
+  messages:
+    no_course: 'Nenhum curso disponível'
   activerecord:
     models:
       course: 'curso'

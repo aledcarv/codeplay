@@ -17,6 +17,6 @@ describe 'admin deletes courses' do
         click_on course.name
 
         expect { click_on 'Apagar' }.to change { Course.count }.by(-1)
-        expect(current_path).to eq(courses_path)
+        expect(current_path).to eq(admin_courses_path)
     end
 end

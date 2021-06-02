@@ -1,0 +1,31 @@
+<h1><%= @course.name %></h1>
+<dl>
+    <dt><%= Course.human_attribute_name(:description) %></dt>
+    <dd><%= @course.description %></dd>
+
+    <dt><%= Course.human_attribute_name(:code) %></dt>
+    <dd><%= @course.code %></dd>
+
+    <dt><%= Course.human_attribute_name(:price) %></dt>
+    <dd><%= number_to_currency @course.price %></dd>
+
+    <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
+    <dd><%= l @course.enrollment_deadline %></dd>
+
+    <dt><%= Course.human_attribute_name(:teacher) %></dt>
+    <dd><%= link_to @course.teacher.name, teacher_path(@course.teacher) %></dd>
+</dl>
+
+<%= link_to t('.register_lesson'), new_admin_course_lesson_path(@course) %>
+
+<% if @course.lessons.any? %>
+    <% @course.lessons.each do |lesson|%>
+        <%= link_to lesson.name, [:admin, @course, lesson] %>
+    <% end %>
+<% else %>
+    <p><%= t('.no_available_lesson') %></p>
+<% end %>
+
+<%= link_to t('helpers.button.edit'), edit_admin_course_path(@course) %>
+<%= link_to t('helpers.button.delete'), [:admin, @course], method: :delete %>
+<%= link_to t('helpers.button.back'), admin_courses_path %>

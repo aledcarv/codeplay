@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'admin edits lesson' do
     it 'successfully' do
+        user = User.create(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.profteste@code.com')
 
@@ -13,10 +14,9 @@ describe 'admin edits lesson' do
                                 content: 'Aula sobre efeito estufa',
                                 course: course)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
-        click_on lesson.name
+        login_as user, scope: :user
+
+        visit admin_course_lesson_path(course, lesson)
         click_on 'Editar aula'
 
         expect(page).to have_text('Editar uma aula')
@@ -25,10 +25,11 @@ describe 'admin edits lesson' do
         fill_in 'Conteúdo', with: 'Aula de urbanização'
         click_on 'Editar'
 
-        expect(page).to have_link('Urbanização', href: course_lesson_path(course, lesson))
+        expect(page).to have_link('Urbanização', href: admin_course_lesson_path(course, lesson))
     end
 
     it 'attribute can not be blank' do
+        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.profteste@code.com')
 
@@ -40,10 +41,9 @@ describe 'admin edits lesson' do
                                 content: 'Aula sobre efeito estufa',
                                 course: course)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
-        click_on lesson.name
+        login_as user, scope: :user
+
+        visit admin_course_lesson_path(course, lesson)
         click_on 'Editar aula'
 
         fill_in 'Nome', with: ''

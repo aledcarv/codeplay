@@ -9,9 +9,7 @@ describe 'admin registers lessons' do
                                 code: 'GEOCURSO', price: 25,
                                 enrollment_deadline: 2.years.from_now, teacher: teacher)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
+        visit admin_course_path(course)
         click_on 'Registrar uma aula'
 
         expect(page).to have_text('Nova aula')
@@ -20,7 +18,7 @@ describe 'admin registers lessons' do
         fill_in 'Conteúdo', with: 'Aula sobre efeito estufa'
         click_on 'Registrar aula'
 
-        expect(current_path).to eq(course_path(course))
+        expect(current_path).to eq(admin_course_path(course))
         expect(page).to have_content('Efeito estufa')
     end
 

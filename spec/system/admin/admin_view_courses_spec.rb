@@ -84,6 +84,6 @@ describe 'Admin view courses' do
     click_on 'Ruby'
     click_on 'Voltar'
 
-    expect(current_path).to eq courses_path
+    expect(current_path).to eq admin_courses_path
   end
 end

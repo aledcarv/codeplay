@@ -1,9 +1,9 @@
 <% if @courses.empty? %>
-    <p><%= t '.no_course' %></p>
+    <p><%= t('.no_course') %></p>
 <% end %>
 
 <% @courses.each do |course| %>
-    <h1><%= link_to course.name, course %></h1>
+    <h1><%= link_to course.name, course_path(course) %></h1>
     <p><%= course.description %></p>
     <p><%= number_to_currency course.price %></p>
 <% end %>

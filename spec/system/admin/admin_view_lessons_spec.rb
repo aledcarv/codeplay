@@ -17,29 +17,28 @@ describe 'admin view lessons' do
                        content: 'Aula sobre urbanização',
                        course: course)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
+        visit admin_course_path(course)
 
         expect(page).to have_link('Efeito estufa')
         expect(page).to have_link('Urbanização')
     end
 
     it 'and view content' do
+        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.profteste@code.com')        
 
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                 code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+                                enrollment_deadline: 30.days.from_now, teacher: teacher)
 
         lesson = Lesson.create!(name: 'Efeito estufa',
                                 content: 'Aula sobre efeito estufa',
                                 course: course)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
+        login_as user, scope: :user
+
+        visit admin_course_path(course)
         click_on lesson.name
 
         expect(page).to have_content('Efeito estufa')
@@ -54,14 +53,13 @@ describe 'admin view lessons' do
                                 code: 'GEOCURSO', price: 25,
                                 enrollment_deadline: Time.current, teacher: teacher)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on 'Geografia'
+        visit admin_course_path(course)
 
         expect(page).to have_content('Nenhuma aula disponível')
     end
 
     it 'and return to course page' do
+        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.profteste@code.com')
 
@@ -73,11 +71,10 @@ describe 'admin view lessons' do
                                 content: 'Aula de geografia',
                                 course: course)
 
-        visit root_path
-        click_on 'Cursos'
-        click_on course.name
-        click_on lesson.name
+        login_as user, scope: :user
 
-        expect(page).to have_link('Voltar', href: course_path(course))
+        visit admin_course_lesson_path(course, lesson)
+
+        expect(page).to have_link('Voltar', href: admin_course_path(course))
     end
 end

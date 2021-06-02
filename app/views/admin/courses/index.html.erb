@@ -1,0 +1,12 @@
+<% if @courses.empty? %>
+    <p><%= t 'messages.no_course' %></p>
+<% end %>
+
+<% @courses.each do |course| %>
+    <h1><%= link_to course.name, admin_course_path(course) %></h1>
+    <p><%= course.description %></p>
+    <p><%= number_to_currency course.price %></p>
+<% end %>
+
+<%= link_to t('.register_course'), new_admin_course_path %>
+<%= link_to t('helpers.button.back'), root_path %>

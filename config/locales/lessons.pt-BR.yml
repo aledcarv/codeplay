@@ -1,5 +1,15 @@
 ---
 pt-BR:
+  admin:
+    lessons:
+      show:
+        button_edit: 'Editar aula'  
+        button_delete: 'Apagar'
+        button_back: 'Voltar'
+      new:
+        title: 'Nova aula'
+      edit:
+        title: 'Editar uma aula'
   lessons:
     edit:
       title: 'Editar uma aula'

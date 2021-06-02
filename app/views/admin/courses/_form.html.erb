@@ -1,0 +1,19 @@
+<%= form_with model: [:admin, course] do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+    <%= form.label :enrollment_deadline %>
+    <%= form.text_field :enrollment_deadline %>
+    <%= form.label :teacher_id %>
+    <%= form.collection_select :teacher_id, teachers, :id, :display_name %>
+    <%= form.submit %>
+<% end %>
+
+<% course.errors.each do |error| %>
+    <%= error.full_message %>
+<% end %>
