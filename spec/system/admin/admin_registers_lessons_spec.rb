@@ -9,6 +9,7 @@ describe 'admin registers lessons' do
                                 code: 'GEOCURSO', price: 25,
                                 enrollment_deadline: 2.years.from_now, teacher: teacher)
 
+        user_login
         visit admin_course_path(course)
         click_on 'Registrar uma aula'
 
@@ -30,6 +31,7 @@ describe 'admin registers lessons' do
                                 code: 'GEOCURSO', price: 25,
                                 enrollment_deadline: 2.years.from_now, teacher: teacher)
 
+        user_login
         visit root_path
         click_on 'Cursos'
         click_on course.name
@@ -37,5 +39,18 @@ describe 'admin registers lessons' do
         click_on 'Registrar aula'
 
         expect(page).to have_content('não pode ficar em branco', count: 2)
+    end
+
+    it 'and must be logged in to access route' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com',)
+
+        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                                code: 'GEOCURSO', price: 25,
+                                enrollment_deadline: 2.years.from_now, teacher: teacher)
+
+        visit new_admin_course_lesson_path(course)
+  
+        expect(current_path).to eq(new_user_session_path)
     end
 end

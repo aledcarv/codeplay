@@ -1,15 +1,8 @@
 require 'rails_helper'
 
 describe 'admin register teacher' do
-    it 'from index page' do
-        visit root_path
-        click_on 'Professores'
-
-        expect(page).to have_link('Registrar um professor', 
-                                   href: new_teacher_path)
-    end
-
     it 'Successfully' do
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Registrar um professor'
@@ -20,7 +13,7 @@ describe 'admin register teacher' do
         attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/teacher-two.jpg')
         click_on 'Criar professor'
 
-        expect(current_path).to eq(teacher_path(Teacher.last))
+        expect(current_path).to eq(admin_teacher_path(Teacher.last))
         expect(page).to have_content('Gonzaga')
         expect(page).to have_content('gonzaga.profteste@code.com')
         expect(page).to have_content('Professor de geografia')
@@ -28,6 +21,7 @@ describe 'admin register teacher' do
     end
 
     it 'and attributes can not be blank' do
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Registrar um professor'
@@ -48,6 +42,7 @@ describe 'admin register teacher' do
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
                                         filename: 'teacher-two.jpg')
 
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Registrar um professor'
@@ -56,5 +51,11 @@ describe 'admin register teacher' do
         click_on 'Criar professor'
         
         expect(page).to have_content('já está em uso')
+    end
+
+    it 'and must be logged in to access route' do
+        visit new_admin_teacher_path
+
+        expect(current_path).to eq(new_user_session_path)
     end
 end

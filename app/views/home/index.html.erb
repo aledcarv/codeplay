@@ -1,9 +1,6 @@
 <h1>Codeplay</h1>
 <h3>Boas vindas ao sistema de gestão de cursos e aulas</h3>
 
-<%= link_to 'Cursos', admin_courses_path %>
-<%= link_to 'Professores', teachers_path %>
-
 <h3>Cursos disponíveis</h3>
 <% @courses.each do |course| %>
     <%= link_to course.name, course %>

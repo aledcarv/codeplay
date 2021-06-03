@@ -52,4 +52,21 @@ describe 'admin edits lesson' do
 
         expect(page).to have_content('não pode ficar em branco', count: 2)
     end
+
+    it 'and must be logged in to access route' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com')
+
+        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                                code: 'GEOCURSO', price: 25,
+                                enrollment_deadline: Time.current, teacher: teacher)
+
+        lesson = Lesson.create!(name: 'Efeito estufa', 
+                                content: 'Aula sobre efeito estufa',
+                                course: course)
+
+        visit edit_admin_course_lesson_path(course, lesson)
+
+        expect(current_path).to eq(new_user_session_path)
+    end
 end

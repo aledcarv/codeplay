@@ -14,6 +14,7 @@ describe 'Admin view courses' do
                    code: 'RUBYONRAILS', price: 20,
                    enrollment_deadline: '20/12/2033', teacher: teacher)
 
+    user_login
     visit root_path
     click_on 'Cursos'
 
@@ -36,7 +37,8 @@ describe 'Admin view courses' do
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
                    enrollment_deadline: '20/12/2033', teacher: teacher)
-
+  
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Ruby on Rails'
@@ -46,10 +48,11 @@ describe 'Admin view courses' do
     expect(page).to have_content('RUBYONRAILS')
     expect(page).to have_content('R$ 20,00')
     expect(page).to have_content('20/12/2033')
-    expect(page).to have_link(teacher.name, href: teacher_path(teacher))
+    expect(page).to have_link(teacher.name, href: admin_teacher_path(teacher))
   end
 
   it 'and no course is available' do
+    user_login
     visit root_path
     click_on 'Cursos'
 
@@ -63,7 +66,8 @@ describe 'Admin view courses' do
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
                    enrollment_deadline: '22/12/2033', teacher: teacher)
-
+    
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Voltar'
@@ -79,11 +83,37 @@ describe 'Admin view courses' do
                    code: 'RUBYBASIC', price: 10,
                    enrollment_deadline: '22/12/2033', teacher: teacher)
 
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Ruby'
     click_on 'Voltar'
 
     expect(current_path).to eq admin_courses_path
+  end
+
+  it 'and must be logged in to view course button' do
+    visit root_path
+
+    expect(page).to_not have_link('Cursos')
+  end
+
+  it 'and must be logged in to view courses through route' do
+    visit admin_courses_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  it 'and must be logged in to view course through route' do
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
+
+    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: '22/12/2033', teacher: teacher)
+
+    visit admin_course_path(course)
+
+    expect(current_path).to eq(new_user_session_path)
   end
 end

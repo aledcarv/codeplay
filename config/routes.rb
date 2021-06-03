@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :courses do
       resources :lessons, only: %i[show new create edit update destroy]
     end
+
+    resources :teachers
   end
 
   resources :courses, only: %i[show] do
@@ -14,5 +16,5 @@ Rails.application.routes.draw do
     post 'enroll', on: :member
     get 'my_enroll', on: :collection
   end
-  resources :teachers
+  resources :teachers, only: %i[]
 end

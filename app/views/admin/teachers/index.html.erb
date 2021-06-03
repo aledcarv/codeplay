@@ -1,0 +1,13 @@
+<% if @teachers.empty? %>
+    <p><%= t('.no_teacher') %></p>
+<% end %>
+
+<% @teachers.each do |teacher| %>
+    <%= link_to teacher.name, admin_teacher_path(teacher)  %>
+    <%= teacher.email %>
+    <%= teacher.bio %>
+    <%= image_tag teacher.profile_picture %>
+<% end %>
+
+<%= link_to t('.register_teacher'), new_admin_teacher_path %>
+<%= link_to t('.button_back'), root_path %>

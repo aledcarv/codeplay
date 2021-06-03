@@ -12,6 +12,7 @@ describe 'admin deletes courses' do
                                 enrollment_deadline: '22/12/2033',
                                 teacher: teacher)
 
+        user_login
         visit root_path
         click_on 'Cursos'
         click_on course.name

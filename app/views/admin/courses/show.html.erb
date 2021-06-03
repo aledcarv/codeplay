@@ -13,7 +13,7 @@
     <dd><%= l @course.enrollment_deadline %></dd>
 
     <dt><%= Course.human_attribute_name(:teacher) %></dt>
-    <dd><%= link_to @course.teacher.name, teacher_path(@course.teacher) %></dd>
+    <dd><%= link_to @course.teacher.name, admin_teacher_path(@course.teacher) %></dd>
 </dl>
 
 <%= link_to t('.register_lesson'), new_admin_course_lesson_path(@course) %>

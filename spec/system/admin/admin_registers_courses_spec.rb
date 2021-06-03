@@ -1,18 +1,11 @@
 require 'rails_helper'
 
-describe 'Admin registers courses' do
-    it 'from index page' do
-      visit root_path
-      click_on 'Cursos'
-  
-      expect(page).to have_link('Registrar um Curso',
-                                href: new_admin_course_path)
-    end
-  
+describe 'Admin registers courses' do  
     it 'successfully' do
       teacher = Teacher.create!(name: 'Gonzaga',
                                 email: 'gonzaga.profteste@code.com')
 
+      user_login
       visit root_path
       click_on 'Cursos'
       click_on 'Registrar um Curso'
@@ -42,6 +35,7 @@ describe 'Admin registers courses' do
                      code: 'RUBYBASIC', price: 10,
                      enrollment_deadline: '22/12/2033', teacher: teacher)
   
+      user_login
       visit root_path
       click_on 'Cursos'
       click_on 'Registrar um Curso'
@@ -63,6 +57,7 @@ describe 'Admin registers courses' do
                      code: 'RUBYBASIC', price: 10,
                      enrollment_deadline: '22/12/2033', teacher: teacher)
   
+      user_login
       visit root_path
       click_on 'Cursos'
       click_on 'Registrar um Curso'
@@ -70,5 +65,11 @@ describe 'Admin registers courses' do
       click_on 'Criar curso'
   
       expect(page).to have_content('já está em uso')
+    end
+
+    it 'and must be logged in to access route' do
+      visit new_admin_course_path
+
+      expect(current_path).to eq(new_user_session_path)
     end
   end

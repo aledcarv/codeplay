@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codeplay</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav>
+      <%= link_to 'Cursos', admin_courses_path %>
+      <%= link_to 'Professores', admin_teachers_path %>
+      <% if user_signed_in? %>
+        <%= current_user.email %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Entrar', new_user_session_path %>
+        <%= link_to 'Registrar-me', new_user_registration_path %>
+      <% end %>
+    </nav>
+
+    <% if notice %>
+      <div>
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

@@ -17,6 +17,7 @@ describe 'admin view lessons' do
                        content: 'Aula sobre urbanização',
                        course: course)
 
+        user_login
         visit admin_course_path(course)
 
         expect(page).to have_link('Efeito estufa')
@@ -53,6 +54,7 @@ describe 'admin view lessons' do
                                 code: 'GEOCURSO', price: 25,
                                 enrollment_deadline: Time.current, teacher: teacher)
 
+        user_login
         visit admin_course_path(course)
 
         expect(page).to have_content('Nenhuma aula disponível')
@@ -76,5 +78,22 @@ describe 'admin view lessons' do
         visit admin_course_lesson_path(course, lesson)
 
         expect(page).to have_link('Voltar', href: admin_course_path(course))
+    end
+
+    it 'and must be logged in to access id route' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com')
+
+        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                                code: 'GEOCURSO', price: 25,
+                                enrollment_deadline: Time.current, teacher: teacher)
+
+        lesson = Lesson.create!(name: 'Efeito estufa',
+                                content: 'Aula de geografia',
+                                course: course)
+
+        visit admin_course_lesson_path(course, lesson)
+
+        expect(current_path).to eq(new_user_session_path)
     end
 end

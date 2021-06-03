@@ -1,0 +1,15 @@
+<%= form_with model: [:admin, teacher] do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+    <%= form.label :bio %>
+    <%= form.text_area :bio %>
+    <%= form.label :profile_picture %>
+    <%= form.file_field :profile_picture %>
+    <%= form.submit %>
+<% end %>
+
+<% teacher.errors.each do |error| %>
+    <%= error.full_message %>
+<% end %>

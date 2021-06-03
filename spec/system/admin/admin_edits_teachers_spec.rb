@@ -9,6 +9,7 @@ describe 'admin edits teacher' do
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
                                         filename: 'teacher-two.jpg')
 
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Gonzaga'
@@ -20,7 +21,7 @@ describe 'admin edits teacher' do
         attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/teacher-one.jpg')
         click_on 'Editar professor'
 
-        expect(current_path).to eq(teacher_path(teacher1))
+        expect(current_path).to eq(admin_teacher_path(teacher1))
         expect(page).to have_content('Cartola')
         expect(page).to have_content('cartola.profteste@code.com')
         expect(page).to have_content('Professor de história')
@@ -35,6 +36,7 @@ describe 'admin edits teacher' do
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
                                         filename: 'teacher-two.jpg')
 
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Gonzaga'
@@ -63,6 +65,7 @@ describe 'admin edits teacher' do
         teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
                                         filename: 'teacher-one.jpg')
 
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Gonzaga'
@@ -72,5 +75,18 @@ describe 'admin edits teacher' do
         click_on 'Editar professor'
         
         expect(page).to have_content('já está em uso')
+    end
+
+    it 'and must be logged in to access route' do
+        teacher2 = Teacher.create!(name: 'Cartola',
+                                   email: 'cartola.profteste@code.com',
+                                   bio: 'Professor de história')
+
+        teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                        filename: 'teacher-one.jpg')
+        
+        visit edit_admin_teacher_path(teacher2)
+
+        expect(current_path).to eq(new_user_session_path)
     end
 end

@@ -16,6 +16,7 @@ describe 'admin view teachers' do
         teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
                                         filename: 'teacher-two.jpg')                                      
         
+        user_login
         visit root_path
         click_on 'Professores'
 
@@ -44,6 +45,8 @@ describe 'admin view teachers' do
         teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
                                         filename: 'teacher-two.jpg')
 
+        
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Gonzaga'
@@ -55,6 +58,7 @@ describe 'admin view teachers' do
     end
 
     it 'and no course is available' do
+        user_login
         visit root_path
         click_on 'Professores'
 
@@ -69,6 +73,7 @@ describe 'admin view teachers' do
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
                                         filename: 'teacher-one.jpg')
 
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Voltar'
@@ -84,11 +89,37 @@ describe 'admin view teachers' do
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
                                         filename: 'teacher-one.jpg')
 
+        user_login
         visit root_path
         click_on 'Professores'
         click_on 'Cartola'
         click_on 'Voltar'
 
-        expect(current_path).to eq teachers_path
+        expect(current_path).to eq admin_teachers_path
+    end
+
+    it 'and must be logged in to access route' do
+        visit admin_teachers_path
+
+        expect(current_path).to eq(new_user_session_path)
+    end
+
+    it 'and must be logged in to access id route' do
+        teacher1 = Teacher.create!(name: 'Cartola',
+                                   email: 'cartola.profteste@code.com',
+                                   bio: 'Professor de história')
+
+        teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                        filename: 'teacher-one.jpg')
+
+        visit admin_teacher_path(teacher1)
+
+        expect(current_path).to eq(new_user_session_path)
+    end
+
+    it 'and must be logged in to view teacher button' do
+        visit root_path
+    
+        expect(page).to_not have_link('Professores')
     end
 end

@@ -12,6 +12,7 @@ describe 'admin edits courses' do
                        enrollment_deadline: '22/12/2033',
                        teacher: teacher)
         
+        user_login
         visit root_path
         click_on 'Cursos'
         click_on course.name
@@ -43,6 +44,7 @@ describe 'admin edits courses' do
                                 enrollment_deadline: '22/12/2033',
                                 teacher: teacher)
 
+        user_login
         visit root_path
         click_on 'Cursos'
         click_on course.name
@@ -75,7 +77,8 @@ describe 'admin edits courses' do
                                         price: '30',
                                         enrollment_deadline: '24/10/2034',
                                         teacher: teacher)
-
+        
+        user_login
         visit root_path
         click_on 'Cursos'
         click_on course.name
@@ -85,5 +88,21 @@ describe 'admin edits courses' do
         click_on 'Editar curso'
 
         expect(page).to have_content('já está em uso')
+    end
+
+    it 'and must be logged in to access edit route' do
+        teacher = Teacher.create!(name: 'Gonzaga',
+                                  email: 'gonzaga.profteste@code.com')
+
+        course = Course.create!(name: 'Ruby',
+                              description: 'Um curso de Ruby',
+                              code: 'RUBYBASIC',
+                              price: '10',
+                              enrollment_deadline: '22/12/2033',
+                              teacher: teacher)
+
+        visit edit_admin_course_path(course)
+
+        expect(current_path).to eq(new_user_session_path)
     end
 end
