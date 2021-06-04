@@ -1,5 +1,4 @@
 class Admin::CoursesController < Admin::AdminController
-    before_action :authenticate_user!, only: %i[index show new update edit update]
     before_action :set_course, only: %i[show edit update destroy enroll]
 
     def index
