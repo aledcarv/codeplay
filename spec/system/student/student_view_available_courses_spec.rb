@@ -39,7 +39,7 @@ describe 'student view available courses' do
     end
 
     it 'and does not view enrollment if deadline is over' do
-        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
+        student = Student.create!(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         unavailable_course = Course.create!(name: 'Matemática', description: 'Curso de matemática',
@@ -71,7 +71,7 @@ describe 'student view available courses' do
     end
 
     it 'and buy a course' do
-        user = User.create!(email: 'jane.doe@code.com', password: '012345')
+        student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
@@ -81,12 +81,12 @@ describe 'student view available courses' do
                                       code: 'SOCIOCURSO', price: 25,
                                       enrollment_deadline: 1.month.from_now, teacher: teacher)
 
-        login_as user, scope: :user
+        login_as student, scope: :student
         visit root_path
         click_on 'Geografia'
         click_on 'Comprar'
 
-        expect(current_path).to eq(my_enroll_courses_path)
+        expect(current_path).to eq(my_enroll_student_courses_path)
         expect(page).to have_content('Curso comprado com sucesso')
         expect(page).to have_content('Geografia')
         expect(page).to have_content('R$ 30,00')

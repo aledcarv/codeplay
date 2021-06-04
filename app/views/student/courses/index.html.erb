@@ -1,0 +1,11 @@
+<% if @courses.empty? %>
+    <p><%= t('.no_course') %></p>
+<% end %>
+
+<% @courses.each do |course| %>
+    <h1><%= link_to course.name, student_course_path(course) %></h1>
+    <p><%= course.description %></p>
+    <p><%= number_to_currency course.price %></p>
+<% end %>
+
+<%= link_to t('.button_back'), root_path %>

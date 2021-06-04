@@ -8,6 +8,6 @@
     <% else %>
         <%= link_to course.name, course_path(course) %>
     <% end %>
-        <%= course.description %>
+    <%= course.description %>
     <%= number_to_currency course.price %>
 <% end %>

@@ -20,7 +20,8 @@ pt-BR:
   student:
     courses:
       index:
-        register_course: 'Registrar um Curso'
+        no_course: 'Nenhum curso disponível'
+        button_back: 'Voltar'
       show:
         buy: 'Comprar'
         enrollment_over: 'O prazo de matrícula desse curso encerrou'

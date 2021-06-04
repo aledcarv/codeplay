@@ -42,15 +42,6 @@ class Admin::CoursesController < Admin::AdminController
         redirect_to admin_courses_path
     end
 
-    def enroll
-        current_user.enrollments.create!(course: @course, price: @course.price)
-        redirect_to my_enroll_courses_path, notice: 'Curso comprado com sucesso'
-    end
-
-    def my_enroll
-        @enrollments = current_user.enrollments
-    end
-
     private
         def set_course
             @course = Course.find(params[:id])

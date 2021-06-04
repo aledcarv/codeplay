@@ -7,48 +7,14 @@ class Student::CoursesController < Student::StudentController
 
     def show
     end
-
-    def new
-        @teachers = Teacher.all
-        @course = Course.new
-    end
-
-    def create
-        @course = Course.new(course_params)
-
-        if @course.save
-            redirect_to @course
-        else
-            @teachers = Teacher.all
-            render :new
-        end
-    end
-
-    def edit
-        @teachers = Teacher.all
-    end
-
-    def update
-        if @course.update(course_params)
-            redirect_to @course
-        else
-            @teachers = Teacher.all
-            render :edit
-        end
-    end
-
-    def destroy
-        @course.destroy
-        redirect_to courses_path
-    end
-
+    
     def enroll
-        current_user.enrollments.create!(course: @course, price: @course.price)
-        redirect_to my_enroll_courses_path, notice: 'Curso comprado com sucesso'
+        current_student.enrollments.create!(course: @course, price: @course.price)
+        redirect_to my_enroll_student_courses_path, notice: 'Curso comprado com sucesso'
     end
 
     def my_enroll
-        @enrollments = current_user.enrollments
+        @enrollments = current_student.enrollments
     end
 
     private

@@ -18,10 +18,10 @@
 
 <%= link_to t('.register_lesson'), new_course_lesson_path(@course) %>
 
-<% if user_signed_in? %>
-    <% if current_user.courses.exclude?(@course) %>
+<% if student_signed_in? %>
+    <% if current_student.courses.exclude?(@course) %>
         <% if @course.enrollment_deadline >= Date.current %>
-            <%= link_to t('.buy'), enroll_course_path, method: :post %>
+            <%= link_to t('.buy'), enroll_student_course_path, method: :post %>
         <% else %>
             <p><%= t('.enrollment_over') %></p>
         <% end %>
