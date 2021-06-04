@@ -17,6 +17,20 @@ pt-BR:
         title: 'Registrar um curso'
       edit:
         title: 'Editar um curso'
+  student:
+    courses:
+      index:
+        register_course: 'Registrar um Curso'
+      show:
+        buy: 'Comprar'
+        enrollment_over: 'O prazo de matrícula desse curso encerrou'
+        login_message_html: "Faça %{login_href} para comprar este curso"
+        no_available_lesson: 'Nenhuma aula disponível'
+        button_back: 'Voltar'
+      new:
+        title: 'Registrar um curso'
+      edit:
+        title: 'Editar um curso'
   courses:
     index:
       no_course: 'Nenhum curso disponível'

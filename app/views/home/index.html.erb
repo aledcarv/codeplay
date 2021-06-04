@@ -3,7 +3,11 @@
 
 <h3>Cursos disponíveis</h3>
 <% @courses.each do |course| %>
-    <%= link_to course.name, course %>
-    <%= course.description %>
+    <% if student_signed_in? %>
+        <%= link_to course.name, student_course_path(course) %>
+    <% else %>
+        <%= link_to course.name, course_path(course) %>
+    <% end %>
+        <%= course.description %>
     <%= number_to_currency course.price %>
 <% end %>

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'student view available courses' do
     it 'courses with enrollment still available' do
+        student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
@@ -11,6 +12,7 @@ describe 'student view available courses' do
                                             code: 'HISCURSO', price: 25,
                                             enrollment_deadline: 1.day.ago, teacher: teacher)
 
+        login_as student, scope: :student
         visit root_path
 
         expect(page).to have_content('Geografia')
@@ -29,7 +31,7 @@ describe 'student view available courses' do
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
 
-        login_as user, scope: :user
+        login_as student, scope: :student
         visit root_path
         click_on 'Geografia'
 
