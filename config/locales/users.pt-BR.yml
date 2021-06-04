@@ -9,7 +9,7 @@ pt-BR:
       user:
         password: Senha
         password_confirmation: Confirmação de senha
-  devise:
+  users:
     registrations:
       new:
         title: Registrar
