@@ -20,7 +20,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :courses, only: %i[index show] do
-    resources :lessons, only: %i[show]
-  end
+  resources :courses, only: %i[index show]
 end

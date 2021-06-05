@@ -13,10 +13,8 @@
     <dd><%= l @course.enrollment_deadline %></dd>
 
     <dt><%= Course.human_attribute_name(:teacher) %></dt>
-    <dd><%= link_to @course.teacher.name, teacher_path(@course.teacher) %></dd>
+    <dd><%= @course.teacher.name %></dd>
 </dl>
-
-<%= link_to t('.register_lesson'), new_course_lesson_path(@course) %>
 
 <% if student_signed_in? %>
     <% if current_student.courses.exclude?(@course) %>
@@ -27,7 +25,7 @@
         <% end %>
     <% end %>
 <% else %>
-    <p><%= t('.login_message_html', login_href: (link_to 'login', new_user_session_path)) %></p>
+    <p><%= t('.login_message_html', login_href: (link_to 'login', new_student_session_path)) %></p>
 <% end %>
 
 <% if @course.lessons.any? %>
@@ -42,6 +40,4 @@
     <p><%= t('.no_available_lesson') %></p>
 <% end %>
 
-<%= link_to t('.button_edit'), edit_course_path(@course) %>
-<%= link_to t('.button_delete'), @course, method: :delete %>
 <%= link_to t('.button_back'), courses_path %>
