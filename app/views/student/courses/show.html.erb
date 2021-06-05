@@ -25,13 +25,13 @@
         <% end %>
     <% end %>
 <% else %>
-    <p><%= t('.login_message_html', login_href: (link_to 'login', new_user_session_path)) %></p>
+    <p><%= t('.login_message_html', login_href: (link_to 'login', new_student_session_path)) %></p>
 <% end %>
 
 <% if @course.lessons.any? %>
     <% @course.lessons.each do |lesson|%>
-        <% if current_user && current_student.courses.include?(@course) %>
-            <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
+        <% if current_student && current_student.courses.include?(@course) %>
+            <%= link_to lesson.name, student_course_lesson_path(@course, lesson) %>
         <% else %>
             <%= lesson.name %>
         <% end %>

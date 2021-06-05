@@ -55,21 +55,6 @@ describe 'student view available courses' do
         expect(page).to have_content('O prazo de matrícula desse curso encerrou')
     end
 
-    it 'must be signed in to enroll' do
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
-        available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                          code: 'GEOCURSO', price: 30,
-                                          enrollment_deadline: 1.month.from_now, teacher: teacher)
-
-        visit root_path
-        click_on 'Geografia'
-
-        expect(page).to_not have_content('Comprar')
-        expect(page).to have_content('Faça login para comprar este curso')
-        expect(page).to have_link('login', href: new_user_session_path)
-    end
-
     it 'and buy a course' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
@@ -95,16 +80,16 @@ describe 'student view available courses' do
     end
 
     it 'and can not buy a course twice' do
-        user = User.create!(email: 'jane.doe@code.com', password: '012345')
+        student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
         Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: available_course)
-        Enrollment.create!(user: user, course: available_course)
+        Enrollment.create!(student: student, course: available_course)
 
-        login_as user, scope: :user
+        login_as student, scope: :student
         visit root_path
         click_on 'Geografia'
 

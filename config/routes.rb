@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       post 'enroll', on: :member
       get 'my_enroll', on: :collection
     end
-    resources :teachers, only: %i[]
+  end
+
+  resources :courses, only: %i[index show] do
+    resources :lessons, only: %i[show]
   end
 end

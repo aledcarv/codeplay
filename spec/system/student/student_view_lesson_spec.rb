@@ -2,16 +2,16 @@ require 'rails_helper'
 
 describe 'student view lesson' do
     it 'successfully' do
-        user = User.create!(email: 'jane.doe@code.com', password: '012345')
+        student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
         lesson =  Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: course)
-        Enrollment.create!(user: user, course: course, price: course.price)
+        Enrollment.create!(student: student, course: course, price: course.price)
 
-        login_as user, scope: :user
+        login_as student, scope: :student
 
         visit root_path
         click_on 'Cursos'
@@ -24,7 +24,7 @@ describe 'student view lesson' do
     end
 
     it 'without enrollment can not view lesson link' do
-        user = User.create!(email: 'jane.doe@code.com', password: '012345')
+        student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
@@ -32,7 +32,7 @@ describe 'student view lesson' do
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
         Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: available_course)
     
-        login_as user, scope: :user
+        login_as student, scope: :student
     
         visit root_path
         click_on 'Cursos'
@@ -50,13 +50,13 @@ describe 'student view lesson' do
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
         lesson = Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: course)
     
-        visit course_lesson_path(course, lesson)
+        visit student_course_lesson_path(course, lesson)
     
-        expect(current_path).to eq(new_user_session_path)
+        expect(current_path).to eq(new_student_session_path)
     end
     
     it 'without enrollment can not view lesson' do
-        user = User.create!(email: 'jane.doe@code.com', password: '012345')
+        student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
                                   email: 'gonzaga.prof@code.com')
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
@@ -64,10 +64,10 @@ describe 'student view lesson' do
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
         lesson = Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: course)
     
-        login_as user, scope: :user
-        visit course_lesson_path(course, lesson)
+        login_as student, scope: :student
+        visit student_course_lesson_path(course, lesson)
     
-        expect(current_path).to eq(course_path(course))
+        expect(current_path).to eq(student_course_path(course))
         expect(page).to have_link('Comprar')
     end
 end
