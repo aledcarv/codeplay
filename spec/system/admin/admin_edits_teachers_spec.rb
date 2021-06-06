@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'admin edits teacher' do
     it 'successfully' do
-        teacher1 = Teacher.create!(name: 'Gonzaga', 
-                                   email: 'gonzaga.profteste@code.com',
+        teacher1 = Teacher.create!(name: 'luiz', 
+                                   email: 'luiz.profteste@code.com',
                                    bio: 'Professor de geografia')
 
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
@@ -12,7 +12,7 @@ describe 'admin edits teacher' do
         user_login
         visit root_path
         click_on 'Professores'
-        click_on 'Gonzaga'
+        click_on 'luiz'
         click_on 'Editar'
 
         fill_in 'Nome', with: 'Cartola'
@@ -29,8 +29,8 @@ describe 'admin edits teacher' do
     end
 
     it 'and attribute can not be blank' do
-        teacher1 = Teacher.create!(name: 'Gonzaga', 
-                                   email: 'gonzaga.profteste@code.com',
+        teacher1 = Teacher.create!(name: 'marcelo', 
+                                   email: 'marcelo.profteste@code.com',
                                    bio: 'Professor de geografia')
 
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
@@ -39,7 +39,7 @@ describe 'admin edits teacher' do
         user_login
         visit root_path
         click_on 'Professores'
-        click_on 'Gonzaga'
+        click_on 'marcelo'
         click_on 'Editar'
 
         fill_in 'Nome', with: ''
@@ -51,8 +51,8 @@ describe 'admin edits teacher' do
     end
 
     it 'and email must be uniq' do
-        teacher1 = Teacher.create!(name: 'Gonzaga',
-                                   email: 'gonzaga.profteste@code.com',
+        teacher1 = Teacher.create!(name: 'Silvio',
+                                   email: 'silvio.profteste@code.com',
                                    bio: 'Professor de geografia')
 
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
@@ -68,7 +68,7 @@ describe 'admin edits teacher' do
         user_login
         visit root_path
         click_on 'Professores'
-        click_on 'Gonzaga'
+        click_on 'Silvio'
         click_on 'Editar'
 
         fill_in 'Email', with: 'cartola.profteste@code.com'

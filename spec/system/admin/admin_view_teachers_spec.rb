@@ -38,8 +38,8 @@ describe 'admin view teachers' do
         teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
                                         filename: 'teacher-one.jpg')
 
-        teacher2 = Teacher.create!(name: 'Gonzaga',
-                                   email: 'gonzaga.profteste@code.com',
+        teacher2 = Teacher.create!(name: 'Dorival',
+                                   email: 'dorival.profteste@code.com',
                                    bio: 'Professor de geografia')
 
         teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
@@ -49,10 +49,10 @@ describe 'admin view teachers' do
         user_login
         visit root_path
         click_on 'Professores'
-        click_on 'Gonzaga'
+        click_on 'Dorival'
 
-        expect(page).to have_content('Gonzaga')
-        expect(page).to have_content('gonzaga.profteste@code.com')
+        expect(page).to have_content('Dorival')
+        expect(page).to have_content('dorival.profteste@code.com')
         expect(page).to have_content('Professor de geografia')
         expect(page).to have_css('img[src*="teacher-two.jpg"]')
     end
