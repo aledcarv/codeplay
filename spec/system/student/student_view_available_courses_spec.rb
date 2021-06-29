@@ -4,7 +4,7 @@ describe 'student view available courses' do
     it 'courses with enrollment still available' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -26,7 +26,7 @@ describe 'student view available courses' do
     it 'and view enrollment link' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -41,7 +41,7 @@ describe 'student view available courses' do
     it 'and does not view enrollment if deadline is over' do
         student = Student.create!(email: 'pessoa.cadastro@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         unavailable_course = Course.create!(name: 'Matemática', description: 'Curso de matemática',
                                           code: 'MATCURSO', price: 30,
                                           enrollment_deadline: 1.day.ago, teacher: teacher)
@@ -58,7 +58,7 @@ describe 'student view available courses' do
     it 'and buy a course' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -82,7 +82,7 @@ describe 'student view available courses' do
     it 'and can not buy a course twice' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)

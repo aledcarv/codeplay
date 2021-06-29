@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Visitor visit homepage' do
   it 'successfully' do
     teacher = Teacher.create!(name: 'Gonzaga',
-                              email: 'gonzaga.prof@code.com')
+                              email: 'gonzaga_prof@code.com')
     
     course = Course.create!(name: 'Matemática', description: 'Curso de matemática',
                    code: 'MATCURSO', price: 30,
@@ -21,7 +21,7 @@ describe 'Visitor visit homepage' do
 
   it 'and view details' do
     teacher = Teacher.create!(name: 'Gonzaga',
-                              email: 'gonzaga.prof@code.com')
+                              email: 'gonzaga_prof@code.com')
     Course.create!(name: 'Matemática', description: 'Curso de matemática',
                    code: 'MATCURSO', price: 30,
                    enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -38,7 +38,7 @@ describe 'Visitor visit homepage' do
 
   it 'must be signed in to enroll' do
     teacher = Teacher.create!(name: 'Gonzaga',
-                              email: 'gonzaga.prof@code.com')
+                              email: 'gonzaga_prof@code.com')
     available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                       code: 'GEOCURSO', price: 30,
                                       enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -53,7 +53,7 @@ describe 'Visitor visit homepage' do
 
   it 'and view lessons' do
     teacher = Teacher.create!(name: 'Gonzaga',
-                              email: 'gonzaga.prof@code.com')
+                              email: 'gonzaga_prof@code.com')
     course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                             code: 'GEOCURSO', price: 30,
                             enrollment_deadline: 1.month.from_now, teacher: teacher)

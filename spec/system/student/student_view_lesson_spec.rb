@@ -4,7 +4,7 @@ describe 'student view lesson' do
     it 'successfully' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -26,7 +26,7 @@ describe 'student view lesson' do
     it 'without enrollment can not view lesson link' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -44,7 +44,7 @@ describe 'student view lesson' do
     
     it 'without login can not view lesson' do
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
@@ -58,7 +58,7 @@ describe 'student view lesson' do
     it 'without enrollment can not view lesson' do
         student = Student.create!(email: 'jane.doe@code.com', password: '012345')
         teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.prof@code.com')
+                                  email: 'gonzaga_prof@code.com')
         course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                                           code: 'GEOCURSO', price: 30,
                                           enrollment_deadline: 1.month.from_now, teacher: teacher)
