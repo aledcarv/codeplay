@@ -1,3 +1,3 @@
 class Student::StudentController < ActionController::Base
-    layout 'student'
+  layout 'student'
 end

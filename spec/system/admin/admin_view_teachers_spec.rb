@@ -1,125 +1,124 @@
 require 'rails_helper'
 
 describe 'admin view teachers' do
-    it 'successfully' do
-        teacher1 = Teacher.create!(name: 'Cartola', 
-                                   email: 'cartola.profteste@code.com',
-                                   bio: 'Professor de história',)
+  it 'successfully' do
+    teacher1 = Teacher.create!(name: 'Cartola',
+                               email: 'cartola.profteste@code.com',
+                               bio: 'Professor de história')
 
-        teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'), 
-                                           filename: 'teacher-one.jpg')
+    teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                    filename: 'teacher-one.jpg')
 
-        teacher2 = Teacher.create!(name: 'Gonzaga',
-                                   email: 'gonzaga.profteste@code.com',
-                                   bio: 'Professor de geografia')
+    teacher2 = Teacher.create!(name: 'Gonzaga',
+                               email: 'gonzaga.profteste@code.com',
+                               bio: 'Professor de geografia')
 
-        teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
-                                        filename: 'teacher-two.jpg')                                      
-        
-        user_login
-        visit root_path
-        click_on 'Professores'
+    teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
+                                    filename: 'teacher-two.jpg')
 
-        expect(page).to have_content('Cartola')
-        expect(page).to have_content('cartola.profteste@code.com')
-        expect(page).to have_content('Professor de história')
-        expect(page).to have_css('img[src*="teacher-one.jpg"]')
-        expect(page).to have_content('Gonzaga')
-        expect(page).to have_content('gonzaga.profteste@code.com')
-        expect(page).to have_content('Professor de geografia')
-        expect(page).to have_css('img[src*="teacher-two.jpg"]')
-    end
+    user_login
+    visit root_path
+    click_on 'Professores'
 
-    it 'and view details' do
-        teacher1 = Teacher.create!(name: 'Cartola',
-                                   email: 'cartola.profteste@code.com',
-                                   bio: 'Professor de história')
+    expect(page).to have_content('Cartola')
+    expect(page).to have_content('cartola.profteste@code.com')
+    expect(page).to have_content('Professor de história')
+    expect(page).to have_css('img[src*="teacher-one.jpg"]')
+    expect(page).to have_content('Gonzaga')
+    expect(page).to have_content('gonzaga.profteste@code.com')
+    expect(page).to have_content('Professor de geografia')
+    expect(page).to have_css('img[src*="teacher-two.jpg"]')
+  end
 
-        teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
-                                        filename: 'teacher-one.jpg')
+  it 'and view details' do
+    teacher1 = Teacher.create!(name: 'Cartola',
+                               email: 'cartola.profteste@code.com',
+                               bio: 'Professor de história')
 
-        teacher2 = Teacher.create!(name: 'Dorival',
-                                   email: 'dorival.profteste@code.com',
-                                   bio: 'Professor de geografia')
+    teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                    filename: 'teacher-one.jpg')
 
-        teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
-                                        filename: 'teacher-two.jpg')
+    teacher2 = Teacher.create!(name: 'Dorival',
+                               email: 'dorival.profteste@code.com',
+                               bio: 'Professor de geografia')
 
-        
-        user_login
-        visit root_path
-        click_on 'Professores'
-        click_on 'Dorival'
+    teacher2.profile_picture.attach(io: File.open('spec/fixtures/teacher-two.jpg'),
+                                    filename: 'teacher-two.jpg')
 
-        expect(page).to have_content('Dorival')
-        expect(page).to have_content('dorival.profteste@code.com')
-        expect(page).to have_content('Professor de geografia')
-        expect(page).to have_css('img[src*="teacher-two.jpg"]')
-    end
+    user_login
+    visit root_path
+    click_on 'Professores'
+    click_on 'Dorival'
 
-    it 'and no course is available' do
-        user_login
-        visit root_path
-        click_on 'Professores'
+    expect(page).to have_content('Dorival')
+    expect(page).to have_content('dorival.profteste@code.com')
+    expect(page).to have_content('Professor de geografia')
+    expect(page).to have_css('img[src*="teacher-two.jpg"]')
+  end
 
-        expect(page).to have_content('Nenhum professor disponível')
-    end
+  it 'and no course is available' do
+    user_login
+    visit root_path
+    click_on 'Professores'
 
-    it 'and return to homepage' do
-        teacher1 = Teacher.create!(name: 'Cartola',
-                                   email: 'cartola.profteste@code.com',
-                                   bio: 'Professor de história')
+    expect(page).to have_content('Nenhum professor disponível')
+  end
 
-        teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
-                                        filename: 'teacher-one.jpg')
+  it 'and return to homepage' do
+    teacher1 = Teacher.create!(name: 'Cartola',
+                               email: 'cartola.profteste@code.com',
+                               bio: 'Professor de história')
 
-        user_login
-        visit root_path
-        click_on 'Professores'
-        click_on 'Voltar'
+    teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                    filename: 'teacher-one.jpg')
 
-        expect(current_path).to eq root_path
-    end
+    user_login
+    visit root_path
+    click_on 'Professores'
+    click_on 'Voltar'
 
-    it 'and return to teachers page' do
-        teacher1 = Teacher.create!(name: 'Cartola',
-                                   email: 'cartola.profteste@code.com',
-                                   bio: 'Professor de história')
+    expect(current_path).to eq root_path
+  end
 
-        teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
-                                        filename: 'teacher-one.jpg')
+  it 'and return to teachers page' do
+    teacher1 = Teacher.create!(name: 'Cartola',
+                               email: 'cartola.profteste@code.com',
+                               bio: 'Professor de história')
 
-        user_login
-        visit root_path
-        click_on 'Professores'
-        click_on 'Cartola'
-        click_on 'Voltar'
+    teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                    filename: 'teacher-one.jpg')
 
-        expect(current_path).to eq admin_teachers_path
-    end
+    user_login
+    visit root_path
+    click_on 'Professores'
+    click_on 'Cartola'
+    click_on 'Voltar'
 
-    it 'and must be logged in to access route' do
-        visit admin_teachers_path
+    expect(current_path).to eq admin_teachers_path
+  end
 
-        expect(current_path).to eq(new_user_session_path)
-    end
+  it 'and must be logged in to access route' do
+    visit admin_teachers_path
 
-    it 'and must be logged in to access id route' do
-        teacher1 = Teacher.create!(name: 'Cartola',
-                                   email: 'cartola.profteste@code.com',
-                                   bio: 'Professor de história')
+    expect(current_path).to eq(new_user_session_path)
+  end
 
-        teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
-                                        filename: 'teacher-one.jpg')
+  it 'and must be logged in to access id route' do
+    teacher1 = Teacher.create!(name: 'Cartola',
+                               email: 'cartola.profteste@code.com',
+                               bio: 'Professor de história')
 
-        visit admin_teacher_path(teacher1)
+    teacher1.profile_picture.attach(io: File.open('spec/fixtures/teacher-one.jpg'),
+                                    filename: 'teacher-one.jpg')
 
-        expect(current_path).to eq(new_user_session_path)
-    end
+    visit admin_teacher_path(teacher1)
 
-    it 'and must be logged in to view teacher button' do
-        visit root_path
-    
-        expect(page).to_not have_link('Professores')
-    end
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  it 'and must be logged in to view teacher button' do
+    visit root_path
+
+    expect(page).to_not have_link('Professores')
+  end
 end

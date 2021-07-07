@@ -4,11 +4,11 @@ describe 'Visitor visit homepage' do
   it 'successfully' do
     teacher = Teacher.create!(name: 'Gonzaga',
                               email: 'gonzaga_prof@code.com')
-    
+
     course = Course.create!(name: 'Matemática', description: 'Curso de matemática',
-                   code: 'MATCURSO', price: 30,
-                   enrollment_deadline: 1.month.from_now, teacher: teacher)
-    
+                            code: 'MATCURSO', price: 30,
+                            enrollment_deadline: 1.month.from_now, teacher: teacher)
+
     visit root_path
 
     expect(page).to have_css('h1', text: 'Codeplay')
@@ -33,7 +33,7 @@ describe 'Visitor visit homepage' do
     expect(page).to have_content('Curso de matemática')
     expect(page).to have_content('MATCURSO')
     expect(page).to have_content('R$ 30,00')
-    expect(page).to have_content(1.month.from_now.strftime("%d/%m/%Y"))
+    expect(page).to have_content(1.month.from_now.strftime('%d/%m/%Y'))
   end
 
   it 'must be signed in to enroll' do
@@ -63,6 +63,6 @@ describe 'Visitor visit homepage' do
     click_on 'Geografia'
 
     expect(page).to have_content('Efeito estufa')
-    expect(page).to_not have_link('Efeito estufa')    
+    expect(page).to_not have_link('Efeito estufa')
   end
 end

@@ -1,61 +1,61 @@
 require 'rails_helper'
 
 describe 'admin view lessons' do
-    it 'of a course' do
-        course = create(:course)
-        create(:lesson, name: 'Efeito estufa', course: course)
-        create(:lesson, name: 'Urbanização', course: course)
+  it 'of a course' do
+    course = create(:course)
+    create(:lesson, name: 'Efeito estufa', course: course)
+    create(:lesson, name: 'Urbanização', course: course)
 
-        user_login
-        visit admin_course_path(course)
+    user_login
+    visit admin_course_path(course)
 
-        expect(page).to have_link('Efeito estufa')
-        expect(page).to have_link('Urbanização')
-    end
+    expect(page).to have_link('Efeito estufa')
+    expect(page).to have_link('Urbanização')
+  end
 
-    it 'and view content' do
-        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
-        
-        course = create(:course)
-        lesson = create(:lesson, course: course)
+  it 'and view content' do
+    user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
 
-        login_as user, scope: :user
+    course = create(:course)
+    lesson = create(:lesson, course: course)
 
-        visit admin_course_path(course)
-        click_on lesson.name
+    login_as user, scope: :user
 
-        expect(page).to have_content('Efeito estufa')
-        expect(page).to have_content('Aula sobre efeito estufa')
-    end
+    visit admin_course_path(course)
+    click_on lesson.name
 
-    it 'and attribute can not be blank' do
-        course = create(:course)
+    expect(page).to have_content('Efeito estufa')
+    expect(page).to have_content('Aula sobre efeito estufa')
+  end
 
-        user_login
-        visit admin_course_path(course)
+  it 'and attribute can not be blank' do
+    course = create(:course)
 
-        expect(page).to have_content('Nenhuma aula disponível')
-    end
+    user_login
+    visit admin_course_path(course)
 
-    it 'and return to course page' do
-        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
-        course = create(:course)
-        lesson = create(:lesson, course: course)
+    expect(page).to have_content('Nenhuma aula disponível')
+  end
 
-        login_as user, scope: :user
+  it 'and return to course page' do
+    user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
+    course = create(:course)
+    lesson = create(:lesson, course: course)
 
-        visit admin_course_lesson_path(course, lesson)
+    login_as user, scope: :user
 
-        expect(page).to have_link('Voltar', href: admin_course_path(course))
-    end
+    visit admin_course_lesson_path(course, lesson)
 
-    it 'and must be logged in to access id route' do
-        course = create(:course)
+    expect(page).to have_link('Voltar', href: admin_course_path(course))
+  end
 
-        lesson = create(:lesson, course: course)
+  it 'and must be logged in to access id route' do
+    course = create(:course)
 
-        visit admin_course_lesson_path(course, lesson)
+    lesson = create(:lesson, course: course)
 
-        expect(current_path).to eq(new_user_session_path)
-    end
+    visit admin_course_lesson_path(course, lesson)
+
+    expect(current_path).to eq(new_user_session_path)
+  end
 end

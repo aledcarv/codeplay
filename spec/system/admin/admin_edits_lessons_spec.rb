@@ -1,72 +1,72 @@
 require 'rails_helper'
 
 describe 'admin edits lesson' do
-    it 'successfully' do
-        user = User.create(email: 'pessoa.cadastro@code.com', password: '012345')
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
+  it 'successfully' do
+    user = User.create(email: 'pessoa.cadastro@code.com', password: '012345')
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
 
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+    course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                            code: 'GEOCURSO', price: 25,
+                            enrollment_deadline: Time.current, teacher: teacher)
 
-        lesson = Lesson.create!(name: 'Efeito estufa', 
-                                content: 'Aula sobre efeito estufa',
-                                course: course)
+    lesson = Lesson.create!(name: 'Efeito estufa',
+                            content: 'Aula sobre efeito estufa',
+                            course: course)
 
-        login_as user, scope: :user
+    login_as user, scope: :user
 
-        visit admin_course_lesson_path(course, lesson)
-        click_on 'Editar aula'
+    visit admin_course_lesson_path(course, lesson)
+    click_on 'Editar aula'
 
-        expect(page).to have_text('Editar uma aula')
-        
-        fill_in 'Nome', with: 'Urbanização'
-        fill_in 'Conteúdo', with: 'Aula de urbanização'
-        click_on 'Editar'
+    expect(page).to have_text('Editar uma aula')
 
-        expect(page).to have_link('Urbanização', href: admin_course_lesson_path(course, lesson))
-    end
+    fill_in 'Nome', with: 'Urbanização'
+    fill_in 'Conteúdo', with: 'Aula de urbanização'
+    click_on 'Editar'
 
-    it 'attribute can not be blank' do
-        user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
+    expect(page).to have_link('Urbanização', href: admin_course_lesson_path(course, lesson))
+  end
 
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+  it 'attribute can not be blank' do
+    user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
 
-        lesson = Lesson.create!(name: 'Efeito estufa', 
-                                content: 'Aula sobre efeito estufa',
-                                course: course)
+    course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                            code: 'GEOCURSO', price: 25,
+                            enrollment_deadline: Time.current, teacher: teacher)
 
-        login_as user, scope: :user
+    lesson = Lesson.create!(name: 'Efeito estufa',
+                            content: 'Aula sobre efeito estufa',
+                            course: course)
 
-        visit admin_course_lesson_path(course, lesson)
-        click_on 'Editar aula'
+    login_as user, scope: :user
 
-        fill_in 'Nome', with: ''
-        fill_in 'Conteúdo', with: ''
-        click_on 'Editar'
+    visit admin_course_lesson_path(course, lesson)
+    click_on 'Editar aula'
 
-        expect(page).to have_content('não pode ficar em branco', count: 2)
-    end
+    fill_in 'Nome', with: ''
+    fill_in 'Conteúdo', with: ''
+    click_on 'Editar'
 
-    it 'and must be logged in to access route' do
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
+    expect(page).to have_content('não pode ficar em branco', count: 2)
+  end
 
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+  it 'and must be logged in to access route' do
+    teacher = Teacher.create!(name: 'Gonzaga',
+                              email: 'gonzaga.profteste@code.com')
 
-        lesson = Lesson.create!(name: 'Efeito estufa', 
-                                content: 'Aula sobre efeito estufa',
-                                course: course)
+    course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                            code: 'GEOCURSO', price: 25,
+                            enrollment_deadline: Time.current, teacher: teacher)
 
-        visit edit_admin_course_lesson_path(course, lesson)
+    lesson = Lesson.create!(name: 'Efeito estufa',
+                            content: 'Aula sobre efeito estufa',
+                            course: course)
 
-        expect(current_path).to eq(new_user_session_path)
-    end
+    visit edit_admin_course_lesson_path(course, lesson)
+
+    expect(current_path).to eq(new_user_session_path)
+  end
 end

@@ -1,51 +1,49 @@
 class Admin::LessonsController < Admin::AdminController
-    before_action :set_course, only: %i[show new create edit update destroy]
-    before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[show new create edit update destroy]
+  before_action :set_lesson, only: %i[show edit update destroy]
 
-    def show
+  def show; end
+
+  def new
+    @lesson = Lesson.new
+  end
+
+  def create
+    @lesson = @course.lessons.build(lesson_params)
+
+    if @lesson.save
+      redirect_to admin_course_path(@course)
+    else
+      render :new
     end
+  end
 
-    def new
-        @lesson = Lesson.new
+  def edit; end
+
+  def update
+    if @lesson.update(lesson_params)
+      redirect_to admin_course_path(@course)
+    else
+      render :edit
     end
+  end
 
-    def create
-        @lesson = @course.lessons.build(lesson_params)
+  def destroy
+    @lesson.destroy
+    redirect_to admin_course_path(@course)
+  end
 
-        if @lesson.save
-            redirect_to admin_course_path(@course)
-        else
-            render :new
-        end
-    end
+  private
 
-    def edit
-    end
+  def set_course
+    @course = Course.find(params[:course_id])
+  end
 
-    def update
-        if @lesson.update(lesson_params)
-            redirect_to admin_course_path(@course)
-        else
-            render :edit
-        end
-    end
+  def set_lesson
+    @lesson = Lesson.find(params[:id])
+  end
 
-    def destroy
-        @lesson.destroy
-        redirect_to admin_course_path(@course)
-    end
-
-    private
-
-        def set_course
-            @course = Course.find(params[:course_id])
-        end
-
-        def set_lesson
-            @lesson = Lesson.find(params[:id])
-        end
-
-        def lesson_params
-            params.require(:lesson).permit(:name, :content)
-        end
+  def lesson_params
+    params.require(:lesson).permit(:name, :content)
+  end
 end

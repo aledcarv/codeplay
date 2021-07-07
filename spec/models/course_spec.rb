@@ -17,8 +17,8 @@ describe Course do
                                 email: 'gonzaga.profteste@code.com')
 
       Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033', teacher: teacher)
+                     code: 'RUBYBASIC', price: 10,
+                     enrollment_deadline: '22/12/2033', teacher: teacher)
       course = Course.new(code: 'RUBYBASIC')
 
       course.valid?
