@@ -2,20 +2,9 @@ require 'rails_helper'
 
 describe 'admin view lessons' do
     it 'of a course' do
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
-
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
-
-        Lesson.create!(name: 'Efeito estufa', 
-                       content: 'Aula sobre efeito estufa',
-                       course: course)
-
-        Lesson.create!(name: 'Urbanização',
-                       content: 'Aula sobre urbanização',
-                       course: course)
+        course = create(:course)
+        create(:lesson, name: 'Efeito estufa', course: course)
+        create(:lesson, name: 'Urbanização', course: course)
 
         user_login
         visit admin_course_path(course)
@@ -26,16 +15,9 @@ describe 'admin view lessons' do
 
     it 'and view content' do
         user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')        
-
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: 30.days.from_now, teacher: teacher)
-
-        lesson = Lesson.create!(name: 'Efeito estufa',
-                                content: 'Aula sobre efeito estufa',
-                                course: course)
+        
+        course = create(:course)
+        lesson = create(:lesson, course: course)
 
         login_as user, scope: :user
 
@@ -47,12 +29,7 @@ describe 'admin view lessons' do
     end
 
     it 'and attribute can not be blank' do
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
-
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
+        course = create(:course)
 
         user_login
         visit admin_course_path(course)
@@ -62,16 +39,8 @@ describe 'admin view lessons' do
 
     it 'and return to course page' do
         user = User.create!(email: 'pessoa.cadastro@code.com', password: '012345')
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
-
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
-
-        lesson = Lesson.create!(name: 'Efeito estufa',
-                                content: 'Aula de geografia',
-                                course: course)
+        course = create(:course)
+        lesson = create(:lesson, course: course)
 
         login_as user, scope: :user
 
@@ -81,16 +50,9 @@ describe 'admin view lessons' do
     end
 
     it 'and must be logged in to access id route' do
-        teacher = Teacher.create!(name: 'Gonzaga',
-                                  email: 'gonzaga.profteste@code.com')
+        course = create(:course)
 
-        course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                code: 'GEOCURSO', price: 25,
-                                enrollment_deadline: Time.current, teacher: teacher)
-
-        lesson = Lesson.create!(name: 'Efeito estufa',
-                                content: 'Aula de geografia',
-                                course: course)
+        lesson = create(:lesson, course: course)
 
         visit admin_course_lesson_path(course, lesson)
 
