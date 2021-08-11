@@ -39,9 +39,9 @@ describe 'Visitor visit homepage' do
   it 'must be signed in to enroll' do
     teacher = Teacher.create!(name: 'Gonzaga',
                               email: 'gonzaga_prof@code.com')
-    available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                      code: 'GEOCURSO', price: 30,
-                                      enrollment_deadline: 1.month.from_now, teacher: teacher)
+    Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                   code: 'GEOCURSO', price: 30,
+                   enrollment_deadline: 1.month.from_now, teacher: teacher)
 
     visit root_path
     click_on 'Geografia'
@@ -57,7 +57,7 @@ describe 'Visitor visit homepage' do
     course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
                             code: 'GEOCURSO', price: 30,
                             enrollment_deadline: 1.month.from_now, teacher: teacher)
-    lesson = Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: course)
+    Lesson.create!(name: 'Efeito estufa', content: 'Aula sobre efeito estufa', course: course)
 
     visit root_path
     click_on 'Geografia'

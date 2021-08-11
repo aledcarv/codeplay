@@ -71,12 +71,12 @@ describe 'admin edits courses' do
                             enrollment_deadline: '22/12/2033',
                             teacher: teacher)
 
-    another_course = Course.create!(name: 'Ruby on Rails',
-                                    description: 'Um curso de Ruby on Rails',
-                                    code: 'RUBYONRAILS',
-                                    price: '30',
-                                    enrollment_deadline: '24/10/2034',
-                                    teacher: teacher)
+    Course.create!(name: 'Ruby on Rails',
+                   description: 'Um curso de Ruby on Rails',
+                   code: 'RUBYONRAILS',
+                   price: '30',
+                   enrollment_deadline: '24/10/2034',
+                   teacher: teacher)
 
     user_login
     visit root_path

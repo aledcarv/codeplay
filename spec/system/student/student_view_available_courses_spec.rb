@@ -5,12 +5,12 @@ describe 'student view available courses' do
     student = Student.create!(email: 'jane.doe@code.com', password: '012345')
     teacher = Teacher.create!(name: 'Gonzaga',
                               email: 'gonzaga_prof@code.com')
-    available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                      code: 'GEOCURSO', price: 30,
-                                      enrollment_deadline: 1.month.from_now, teacher: teacher)
-    unavailable_course = Course.create!(name: 'História', description: 'Curso de história',
-                                        code: 'HISCURSO', price: 25,
-                                        enrollment_deadline: 1.day.ago, teacher: teacher)
+    Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                   code: 'GEOCURSO', price: 30,
+                   enrollment_deadline: 1.month.from_now, teacher: teacher)
+    Course.create!(name: 'História', description: 'Curso de história',
+                   code: 'HISCURSO', price: 25,
+                   enrollment_deadline: 1.day.ago, teacher: teacher)
 
     login_as student, scope: :student
     visit root_path
@@ -27,9 +27,9 @@ describe 'student view available courses' do
     student = Student.create!(email: 'jane.doe@code.com', password: '012345')
     teacher = Teacher.create!(name: 'Gonzaga',
                               email: 'gonzaga_prof@code.com')
-    available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                      code: 'GEOCURSO', price: 30,
-                                      enrollment_deadline: 1.month.from_now, teacher: teacher)
+    Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                   code: 'GEOCURSO', price: 30,
+                   enrollment_deadline: 1.month.from_now, teacher: teacher)
 
     login_as student, scope: :student
     visit root_path
@@ -42,9 +42,9 @@ describe 'student view available courses' do
     student = Student.create!(email: 'pessoa.cadastro@code.com', password: '012345')
     teacher = Teacher.create!(name: 'Gonzaga',
                               email: 'gonzaga_prof@code.com')
-    unavailable_course = Course.create!(name: 'Matemática', description: 'Curso de matemática',
-                                        code: 'MATCURSO', price: 30,
-                                        enrollment_deadline: 1.day.ago, teacher: teacher)
+    Course.create!(name: 'Matemática', description: 'Curso de matemática',
+                   code: 'MATCURSO', price: 30,
+                   enrollment_deadline: 1.day.ago, teacher: teacher)
 
     login_as student, scope: :student
     visit root_path
@@ -59,12 +59,12 @@ describe 'student view available courses' do
     student = Student.create!(email: 'jane.doe@code.com', password: '012345')
     teacher = Teacher.create!(name: 'Gonzaga',
                               email: 'gonzaga_prof@code.com')
-    available_course = Course.create!(name: 'Geografia', description: 'Curso de geografia',
-                                      code: 'GEOCURSO', price: 30,
-                                      enrollment_deadline: 1.month.from_now, teacher: teacher)
-    other_course = Course.create!(name: 'Sociologia', description: 'Curso de sociologia',
-                                  code: 'SOCIOCURSO', price: 25,
-                                  enrollment_deadline: 1.month.from_now, teacher: teacher)
+    Course.create!(name: 'Geografia', description: 'Curso de geografia',
+                   code: 'GEOCURSO', price: 30,
+                   enrollment_deadline: 1.month.from_now, teacher: teacher)
+    Course.create!(name: 'Sociologia', description: 'Curso de sociologia',
+                   code: 'SOCIOCURSO', price: 25,
+                   enrollment_deadline: 1.month.from_now, teacher: teacher)
 
     login_as student, scope: :student
     visit root_path

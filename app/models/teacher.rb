@@ -1,5 +1,5 @@
 class Teacher < ApplicationRecord
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true
