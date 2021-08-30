@@ -1,13 +1,19 @@
-<h1>Codeplay</h1>
-<h3>Boas vindas ao sistema de gestão de cursos e aulas</h3>
+<div class="container mt-5">
+    <div class="vh-100 align-items-center">
+        <h1>Codeplay</h1>
+        <h3>Boas vindas ao sistema de gestão de cursos e aulas</h3>
+    </div>
 
-<h3>Cursos disponíveis</h3>
-<% @courses.each do |course| %>
-    <% if student_signed_in? %>
-        <%= link_to course.name, student_course_path(course) %>
-    <% else %>
-        <%= link_to course.name, course_path(course) %>
+    <% if @courses.any? %>
+        <h3>Cursos disponíveis</h3>
+        <% @courses.each do |course| %>
+            <% if student_signed_in? %>
+                <%= link_to course.name, student_course_path(course) %>
+            <% else %>
+                <%= link_to course.name, course_path(course) %>
+            <% end %>
+            <%= course.description %>
+            <%= number_to_currency course.price %>
+        <% end %>
     <% end %>
-    <%= course.description %>
-    <%= number_to_currency course.price %>
-<% end %>
+</div>
