@@ -10,7 +10,6 @@ gem 'bootstrap', '~> 5.1.0'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'puma', '~> 5.0'
-gem 'rubocop-rails', require: false
 gem 'sass-rails', '>= 6'
 gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
@@ -25,6 +24,7 @@ end
 group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
 end
